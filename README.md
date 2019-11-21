@@ -87,10 +87,112 @@ real python：[Instance, Class, and Static Methods — An Overview](https://real
 stack overflow:[What is the difference between @staticmethod and @classmethod?](https://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod)      
 
 ## 4. 类属性和实例属性    
-     
-     
-       
-       
-### 更新中....
+类属性：通俗的讲是挂在类上的属性，所以只要是这个类的实例就可以访问，比如人类有马克思哲学这个属性，所有人都可以去学习使用马克思哲学，所有人都可以访问；从专业角度讲类属性就是放在类的`__dict__`这个字典中的属性。   
+实例属性：同理，实例属性就是每个实例私有的，比如每个人的房子，这就是私有的，别人是不能够拥有的，从专业角度讲实例属性就是放在实例的字典`__dict__`中的。   
+例子：   
+```python   
+class Server:  # Server类
+  protocol = "TCP/IP"  # TCP/IP协议是所有服务器共有的资源
+  
+  def __init__(self, ip, port):
+    self._ip = ip  # ip和端口则是每台服务器自己的
+    self._port = port  # 即使端口相同也不是一台计算机的端口
+```     
+这里的协议protocol就是类属性，IP+port就是实例属性。    
 
+
+## Python的自省   
+**什么是自省？**   
+在日常生活中，自省（introspection）是一种自我检查行为。   
+在计算机编程中，自省是指这种能力：检查某些事物以确定它是什么、它知道什么以及它能做什么。自省向程序员提供了极大的灵活性和控制力。    
+说的更简单直白一点：自省就是面向对象的语言所写的程序在运行时，能够知道对象的类型。简单一句就是，运行时能够获知对象的类型。   
+例如python, buby, object-C,C++ 都有自省的能力，这里面的c++的自省的能力最弱，只能够知道是什么类型，而像python可以知道是什么类型，还有什么属性。     
+python中的自省方法：   
+`type()`   
+`dir()`   
+`getattr()`   
+`hasattr()`   
+`isinstance()`等     
+也是插件化开发技术的依赖之一。
+```python   
+class Server:  # Server类
+  protocol = "TCP/IP"
+  
+  def __init__(self, ip, port):
+    self._ip = ip 
+    self._port = port 
+    
+
+print(hasattr(Server, "protocol"))  # True
+```
+
+## 6. 列表、集合、字典推导式     
+推导式是python开发过程中非常常用的技术，简单但是绝对是好用的，在2.7版本之前并没有字典推导式，由于太好用了，社区一直建议增加，在2.7之后增加了字典推导式。   
+例子：    
+```python   
+# 100以内所有的奇数 —— 列表解析式
+a = [i for i in range(100) if i & 1]
+
+# 100以内3的倍数 —— 集合解析式
+b = {i for i in range(100) if i % 3 == 0}
+
+import random
+import string
+
+# 生成100个name和对应的id —— 字典解析式
+name_id = {"".join([random.choice(string.ascii_letters) for i in range(4)]):random.randint(1000, 9999) for j in range(100)}
+
+```   
+## 7. Python中单下划线和双下划线
+如：服务器的addr是需要大家知道的，不隐藏，`_socket`是服务器的监听socket不必让别人知道，可以隐藏一下，start是服务器的启动方法，需要让别人知道，而用来接收连接的`__accept`则不需要别人知道。   
+```python  
+import socket
+import threading
+
+class Server:
+  def __init__(self, ip, port):  # 魔术方法
+    self.addr = ip, port   # 服务器的地址和端口
+    self._socket = socket.socket()  # 服务器的监听socket
+    
+  def start(self):  # 启动服务器的接口
+    self._socket.bind(self.addr)
+    self._socket.listen()
+    threading.Thread(target=self.__accept, name="接收连接").start()
+    
+  def __accept(self):  # 监听socket用来接收连接的方法
+    new_socket, raddr = self._socket.accept()
+    pass
+    
+print(Server.__dict__)
+```   
+在python的类中，单下划线被约定为隐藏变量，分为两种，一种是开头短下划线`_socket`，另一种是开头长下划线`__accept`；其中短下划线的标识符在类字典中是不更改名称的，而长下滑线的在类属性字典中更改了名称，如：`_Server__accept`,但是由于python的黑魔法太过容易破解，如果我们真的想访问对应的属性，只需要把类字典拿出来看一下名称就可以调用了。   
+总之，`防君子不防小人把！`   
+双下滑下，即两端都有下划线的是一些特殊的魔术方法，以及特殊方法，比如类或实例的字典使用`__dict__`访问，还有上下文使用`__enter__`和`__exit__`来控制。    
+
+回忆不上来的时候可以查阅知乎和stack overflow:   
+stack overflow:[What is the meaning of a single and a double underscore before an object name?](https://stackoverflow.com/questions/1301346/what-is-the-meaning-of-a-single-and-a-double-underscore-before-an-object-name)   
+知乎：[Python的类的下划线命名有什么不同？](https://www.zhihu.com/question/19754941)     
+闲扯：为什么知乎选择用python写？我觉得可能是开发效率高把，现在听说转到go语言了。   
+
+## 8. 格式化字符串中的%和format   
+其中%是类c语言的风格，现如今随着发展，学python的同学可能并不是很熟悉C语言，更多的使用的是format进行字符串格式化了，format函数不仅仅是占个位置那么简单了，它甚至可以进行进制转换、各种对齐方式等，功能堪称强大。   
+以后建议使用format函数，它和print, str调用的都是实例的`__str__`方法。     
+stack overflow参考：[String formatting: % vs .format](https://stackoverflow.com/questions/5082452/string-formatting-vs-format)    
+
+## 9. 迭代器和生成器    
+如果一个对象只有`__iter__`魔术方法，我们可以称它为可迭代对象，但是不是迭代器。   
+如果一个对象拥有`__next__`方法，是迭代器。   
+
+定义一个可迭代对象，要实现`__iter__`方法，定义一个迭代器则必须实现`__iter__`方法和`__next__`方法。因为迭代器也是可迭代对象，所以虽然迭代器的定义是拥有`__next__`方法，但是同时是可迭代对象所以必须有`__iter__`方法。   
+
+`__iter__`方法返回的是迭代器类的实例，`__next__`方法返回的是自身，因为自身已经实现了`__iter__`方法（迭代器一定实现了）。   
+
+
+生成器是一种特殊的迭代器，生成器自动实现了`迭代器协议`，即`__iter__`方法和next方法，不需要再手动实现了。   
+
+在创建一个包含百万元素的列表，要占用很大的内存空间，我们可以采用生成器，能够边计算边循环。   
+
+### 生成器图片   
+
+### 更新中...
 
