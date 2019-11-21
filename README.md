@@ -191,8 +191,7 @@ stack overflow参考：[String formatting: % vs .format](https://stackoverflow.c
 生成器是一种特殊的迭代器，生成器自动实现了`迭代器协议`，即`__iter__`方法和next方法，不需要再手动实现了。   
 
 在创建一个包含百万元素的列表，要占用很大的内存空间，我们可以采用生成器，能够边计算边循环。   
-
-### 生成器图片   
-
+![可迭代对象](https://github.com/duanmingpy/python-interview/blob/master/images/iterable.png)
+## 10. args和**kwargs   
 ### 更新中...
 
