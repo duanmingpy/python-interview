@@ -1,5 +1,6 @@
 # 介绍   
-能够看这篇README的人都是已经具备python开发的程序员了，在所有的知识点中我只进行概要性的提示和简单例子的选举，具体内容相信读者都可以回忆出来，在参照整体的知识点拨之后，相信能够应对参加的python面试，祝好运！
+我相信能够看这篇README的人都是已经具备python开发能力的程序员了，在所有的知识点中我只进行概要性的提示和简单例子的选举，具体内容相信读者都可以回忆出来，在参照整体的知识点拨之后，相信能够应对参加的python面试，祝好运！  
+如果还是学习者，可以在整个学习的过程中，把这些点给提出来精学，这些都是python中的精华，当你整个学习阶段完成之后，并熟悉了这些设计方式和技巧之后，我相信你一定可以在这方面有所建树，同样，祝好运！
 
 # Python语言   
 ## 1. 函数-传参   
@@ -51,9 +52,8 @@ print("函数调用之后的lst:", lst)
 
 ## 2. 元类   
 元类又叫metaclass，在python中我们使用`type(59)`就可以知道59是int类型，但是你考虑过int类的类型吗？这就是元类问题，python中一切皆对象，就像linux中的一切皆文件哲学那么彻底，所以类也是对象，既然是对象就有类型，所有新类型的缺省都是type类型，可以修改，在python中，当我们创建一个对象的时候，它会进行类型检查，如果我们没指定类型缺省就是type类了。可以参考下图：   
-
-### 图片   
-
+![元类](https://github.com/duanmingpy/python-interview/blob/master/images/yuanlei.png)
+   
 细节可以参考stack overflow的解答:[连接地址](http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python)    
 
 ## 3. @staticmethod和@classmethod两个装饰器    
