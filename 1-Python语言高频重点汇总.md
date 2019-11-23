@@ -512,4 +512,78 @@ class MyClass2:
 print(MyClass1() == MyClass2())  # True
 print(MyClass1() is MyClass2())  # False
 ```   
-看上面的例子，真正比较的是两个对象的num属性，而is比较的是对象的地址；如果没有定义`__eq__`则`==`会比较内存地址，一般容器`==`比较的是大小，非容器的`==`比较的是地址。
+看上面的例子，真正比较的是两个对象的num属性，而is比较的是对象的地址；如果没有定义`__eq__`则`==`会比较内存地址，一般容器`==`比较的是大小，非容器的`==`比较的是地址。    
+
+## 26. read, readline和readlines   
+read是读取整个文件；   
+readline是读取一行，使用生成器方法；   
+readlines是读取整个文件到一个迭代器供我们遍历。   
+
+## 27. Python2和Python3的区别   
+print函数的变化：   
+```python   
+# Python2
+print 'Python', python_version()
+print 'Hello, World!'
+print('Hello, World!')
+print "text", ; print 'print more text on the same line'
+
+ 
+run result:
+Python 2.7.6
+Hello, World!
+Hello, World!
+text print more text on the same line
+
+# Python3
+print('Python', python_version())
+print('Hello, World!')
+print("some text,", end="") 
+print(' print more text on the same line')
+
+
+run result:
+Python 3.7.4
+Hello, World!
+some text, print more text on the same line
+```     
+
+整除的变化：   
+```python  
+# python2
+print 'Python', python_version()
+print '3 / 2 =', 3 / 2
+print '3 // 2 =', 3 // 2
+print '3 / 2.0 =', 3 / 2.0
+print '3 // 2.0 =', 3 // 2.0
+
+# 输出：   
+run result:
+Python 2.7.6
+3 / 2 = 1
+3 // 2 = 1
+3 / 2.0 = 1.5
+3 // 2.0 = 1.0
+
+# python3
+print('Python', python_version())
+print('3 / 2 =', 3 / 2)
+print('3 // 2 =', 3 // 2)
+print('3 / 2.0 =', 3 / 2.0)
+print('3 // 2.0 =', 3 // 2.0)
+
+# 输出：
+run result:
+Python 3.4.1
+3 / 2 = 1.5
+3 // 2 = 1
+3 / 2.0 = 1.5
+3 // 2.0 = 1.0
+```    
+具体可以参考ShinChan的博客：[Python 2.x 与 Python 3.x的主要差异](http://chenqx.github.io/2014/11/10/Key-differences-between-Python-2-7-x-and-Python-3-x/)    
+
+## 28. super init   
+在前面[14\. 新式类和旧式类](#14-%E6%96%B0%E5%BC%8F%E7%B1%BB%E5%92%8C%E6%97%A7%E5%BC%8F%E7%B1%BB)中也提了因为MRO的原因，python3可以直接使用`super().__init__()`，这是因为C3算法把搜索路径确定了，而在python2.2之前并不能确定，所以必须要使用`super(ChildB, self).__init__()`来确定。    
+stack overflow参考：[Understanding Python super() with `__init__()` methods \[duplicate\]](https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods)    
+CSDN参考：[
+Python2.7中的super方法浅见](https://blog.csdn.net/mrlevo520/article/details/51712440)
