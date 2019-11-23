@@ -1,30 +1,4 @@
 # Python语言     
-**目录：**   
-[1. 函数-传参](1.-函数\-传参)    
-[2. 元类](2-元类)   
-[3. @staticmethod和@classmethod两个装饰器](3.-@staticmethod和@classmethod两个装饰器)    
-[4. 类属性和实例属性](4.-类属性和实例属性)   
-[5. Python的自省](5.-Python的自省)    
-[6. 列表、集合、字典推导式](6.-列表、集合、字典推导式)   
-[7. Python中单下划线和双下划线](7.-Python中单下划线和双下划线)    
-[8. 格式化字符串中的%和format](8.-格式化字符串中的%和format)    
-[9. 迭代器和生成器](9.-迭代器和生成器)    
-[10. args和\*\*kwargs](10.-args和**kwargs)    
-[11. 面向切面编程AOP和装饰器](11.-面向切面编程AOP和装饰器)      
-[12.鸭子类型](12.鸭子类型)    
-[13. Python中的重载](13.-Python中的重载)    
-[14. 新式类和旧式类](14.-新式类和旧式类)      
-[15. `__new__`和`__init__`的区别](15.-\`\_\_new\_\_\`和\`_\_init\_\_\`的区别)      
-[16. Python中的作用域](16.-Python中的作用域)
-
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-**Table of Contents**
-
-  * [2. 元类](#2.-元类)     
-  * [3. @staticmethod和@classmethod两个装饰器](#3.-@staticmethod和@classmethod两个装饰器)   
-
-<!-- markdown-toc end -->
-
 ## 1. 函数-传参   
 在python中，给一个函数传递参数其实是把实参这个变量对应的地址复制了一份，然后把复制的这个地址传递给函数中局部变量形参，此时实参和对应的形参都指向内存中这一个实际的对象。   
 `第一个例子：`   
@@ -72,7 +46,7 @@ print("函数调用之后的lst:", lst)
 我们可以把所有变量理解为内存中一个对象的`引用`，或者可以看作是C++ 中的指针类型。每一个变量记住的都是对象的地址，而对象又可以分为`可变的mutable`和`不可变的immutable`，在python中，string、tuple、数值是不可变的，list、set、dict是可修改的对象，可以通过多个变量都记住它的地址，然后通过不同变量去修改这些可修改的对象。   
 这是stack overflow上的解答：[连接地址](http://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference)    
 
-## 2 元类   
+## 2. 元类   
 元类又叫metaclass，在python中我们使用`type(59)`就可以知道59是int类型，但是你考虑过int类的类型吗？这就是元类问题，python中一切皆对象，就像linux中的一切皆文件哲学那么彻底，所以类也是对象，既然是对象就有类型，所有新类型的缺省都是type类型，可以修改，在python中，当我们创建一个对象的时候，它会进行类型检查，如果我们没指定类型缺省就是type类了。可以参考下图：   
 ![元类](https://github.com/duanmingpy/python-interview/blob/master/images/yuanlei.png)
    
