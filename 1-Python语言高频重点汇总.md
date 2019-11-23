@@ -189,4 +189,132 @@ stack overflow参考：[String formatting: % vs .format](https://stackoverflow.c
 在创建一个包含百万元素的列表，要占用很大的内存空间，我们可以采用生成器，能够边计算边循环。   
 ![可迭代对象](https://github.com/duanmingpy/python-interview/blob/master/images/iterable.png)
 ## 10. args和**kwargs   
-### 更新中...
+在我们定义形式参数的时候，`*args`和`**kwargs`是一个很方便的选择，但是也可以不使用，比如我们在函数形参中定义时不知道用户会传多少参数时可以使用可变参数，`*args`称为可变位置参数，`**kwargs`称为可变关键字传参，接收的参数分别封成了元组和字典，还有放置在函数参数列表中的位置也要注意，**kwargs放在最后， `*args`必须在`**kwargs`之前。   
+args：   
+```python   
+def average_score(*args): # args是一个元组
+    """计算所有学科的平均分"""
+    return sum(args) / len(args)
+
+print(average_score(10, 20))
+```      
+kwargs：   
+```python   
+def make_tab(**kwargs):
+    return kwargs   # 返回的是字典    
+
+print(make_tab(name="tom", grade=100, age=20))
+
+# 输出结果：  {'name': 'tom', 'grade': 100, 'age': 20}
+
+```    
+我们同样可以使用`*`进行解包，但是参数要对应整齐。   
+stack overflow参考：[Use of *args and **kwargs](https://stackoverflow.com/questions/3394835/use-of-args-and-kwargs)   
+## 11. 面向切面编程AOP和装饰器   
+AOP和OOP一样，是一种编程范式，这种在运行时，动态地将代码切入到类的指定方法、指定位置上的编程思想就是面向切面的编程。简单理解我认为AOP是OOP的补充，OOP从横向上区分出一个个类来，而AOP则从纵向上向对象中加入特定的代码，有了AOP之后，OOP就变得立体了。   
+装饰器就是这种思路了，有AOP的编程经验，理解Python的装饰器就是分分钟的事。既然是装饰器，那么对被装饰的对象来说，一定是功能得到了增强，按方法能增强的地方进行划分，又可以分为以下四类：     
+1. 方法调用前； 
+2. 方法调用后； 
+3. 方法调用前后(环绕)； 
+4. 方法调用异常；   
+```python   
+# 方法调用前：   
+def before(func):
+    def check(a, *args):
+        # 如果小于0，抛出异常
+        if a < 0:  # id肯定是大于等于0的
+            raise Exception('a is less than zero!')
+        else:
+            return func(a, *args)
+    # 记住，返回的一定是函数            
+    return check
+
+@before
+def id(*args):
+    return args  
+    
+# -------------------------
+# 方法调用后
+def afterProxy(func):
+    # 修改返回结果
+    def add_more (*args):
+        result = func(* args)
+        return result + 100  # 调用后修改
+    return add_more
+    
+# -------------------------
+
+# 方法调用前后
+def afterProxy(func):
+    # 修改返回结果
+    def add_more (*args):
+        #  对结果进行包装
+        for value in args:  # 调用前检查
+            if value < 0:
+                raise ValueError
+        result = func(* args)
+        return result + 100  # 调用后修改
+    return add_more
+    
+# ------------------------
+# 方法调用异常
+# 方法调用前后
+def afterProxy(func):
+    # 修改返回结果
+    def add_more (*args):
+        #  对结果进行包装
+        try:
+            result = func(* args)
+        except Exception:  # 捕获异常
+            return "run error"
+        return result + 100  
+    return add_more
+``` 
+StackOverflow参考：[How to make a chain of function decorators?](https://stackoverflow.com/questions/739654/how-to-make-a-chain-of-function-decorators)   
+
+## 12.鸭子类型   
+理解：当我们看到远远的一只鸟走起来像鸭子，游泳也像鸭子，叫声也像鸭子，那么我们就可以称这只鸟为鸭子。     
+在编程中：   
+我们并不关心对象是什么类型，到底是不是鸭子，只关心行为。   
+比如在`python`中，有很多`file-like`的东西，比如`StringIO,GzipFile,socket`。它们有很多相同的方法，我们把它们当作文件使用。    
+又比如`list.extend()`方法中,我们并不关心它的参数是不是`list`,只要它是可迭代的,所以它的参数可以是`list/tuple/dict/`字符串/生成器等.   
+鸭子类型在动态语言中经常使用，非常灵活，使得`python`不想`java`那样专门去弄一大堆的设计模式。     
+
+## 13. Python中的重载   
+函数重载的目的是解决两个问题。   
+1. 可变参数类型；   
+2. 可变参数个数。     
+设计原则：    
+两个函数的功能是相同的，但是传入的参数类型是不同的，此时可以采用函数重载。     
+在python中对于`函数功能相同，参数类型不同`这种情况并不需要重载，因为python本身就可以接收各种类型的参数到函数中，但是我们也可以说天生的实现了重载。   
+对于`函数功能相同，但是参数个数不同`这种情况我们想到的肯定就是可变或者缺省参数了，这里是函数功能相同，但是如果函数功能不同那么缺省参数也就可以用得上了。    
+分析过这两种情况之后我们发现，python就根本不需要单独提出来一个重载的方法，因为天生能够实现。    
+知乎参考：[为什么 Python 不支持函数重载？其他函数大部分都支持的？](https://www.zhihu.com/question/20053359)    
+
+## 14. 新式类和旧式类    
+旧式类没有共同的祖先object，新式类是从`python2.2`版本出现的，到了python3来之后，所有的类都是新式类了，python2版本采用了兼容模式，分为古典类（旧式类）和新式类，新式类中可以使用super。   
+在2.2之前python的MRO遵循的是经典算法，2.2版本采用的是新式类算法，到了2.2之后采用了C3算法，能够保证多继承的单一性。   
+stack overflow参考：[What is the difference betweeen old style and new style classes in Python？](https://stackoverflow.com/questions/54867/what-is-the-difference-between-old-style-and-new-style-classes-in-python)   
+博客园参考：[新式类和经典类](https://www.cnblogs.com/btchenguang/archive/2012/09/17/2689146.html#WizKMOutline_1347874388282497)    
+
+## 15. `__new__`和`__init__`的区别  
+这两个都是类的魔术方法，都是在创建实例的时候使用的，其中`__new__`是一个静态方法，而`__init__`是一个实例方法，在调用`__new__`方法的时候会返回一个创建的实例，然后才进行调用`__init__`进行对实例的实例化。      
+例子：   
+```python   
+class School:
+    def __new__(cls, *args, **kwargs):
+        obj = super().__new__(School)
+        obj.student_number = 10000  # 在new的时候就偷偷的增加一个属性
+        return obj
+
+    def __init__(self, name, city):
+        self.name = name
+        self.city = city
+
+
+Tsinghua = School('清华', "北京")
+print(Tsinghua.student_number)  # 10000  
+```   
+`__metaclass__`是创建类时起作用.所以我们可以分别使用`__metaclass__`,`__new__`和`__init__`来分别在类创建,实例创建和实例初始化的时候做一些小手脚.  
+
+stack overflow参考：[Why is `__init__()` always called after `__new__()`?](https://stackoverflow.com/questions/674304/why-is-init-always-called-after-new)   
