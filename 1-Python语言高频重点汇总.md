@@ -1,4 +1,25 @@
-# Python语言   
+# Python语言     
+**目录：**   
+[1. 函数-传参](1.-函数\-传参)    
+[2. 元类](2.-元类)   
+[3. @staticmethod和@classmethod两个装饰器](3.-@staticmethod和@classmethod两个装饰器)    
+[4. 类属性和实例属性](4.-类属性和实例属性)   
+[5. Python的自省](5.-Python的自省)    
+[6. 列表、集合、字典推导式](6.-列表、集合、字典推导式)   
+[7. Python中单下划线和双下划线](7.-Python中单下划线和双下划线)    
+[8. 格式化字符串中的%和format](8.-格式化字符串中的%和format)    
+[9. 迭代器和生成器](9.-迭代器和生成器)    
+[10. args和\*\*kwargs](10.-args和**kwargs)    
+[11. 面向切面编程AOP和装饰器](11.-面向切面编程AOP和装饰器)      
+[12.鸭子类型](12.鸭子类型)    
+[13. Python中的重载](13.-Python中的重载)    
+[14. 新式类和旧式类](14.-新式类和旧式类)      
+[15. `__new__`和`__init__`的区别](15.-\`\_\_new\_\_\`和\`_\_init\_\_\`的区别)      
+[16. Python中的作用域](16.-Python中的作用域)
+
+
+
+
 ## 1. 函数-传参   
 在python中，给一个函数传递参数其实是把实参这个变量对应的地址复制了一份，然后把复制的这个地址传递给函数中局部变量形参，此时实参和对应的形参都指向内存中这一个实际的对象。   
 `第一个例子：`   
@@ -97,7 +118,7 @@ class Server:  # Server类
 这里的协议protocol就是类属性，IP+port就是实例属性。    
 
 
-## Python的自省   
+## 5. Python的自省   
 **什么是自省？**   
 在日常生活中，自省（introspection）是一种自我检查行为。   
 在计算机编程中，自省是指这种能力：检查某些事物以确定它是什么、它知道什么以及它能做什么。自省向程序员提供了极大的灵活性和控制力。    
@@ -209,8 +230,8 @@ print(make_tab(name="tom", grade=100, age=20))
 
 ```    
 我们同样可以使用`*`进行解包，但是参数要对应整齐。   
-stack overflow参考：[Use of *args and **kwargs](https://stackoverflow.com/questions/3394835/use-of-args-and-kwargs)   
-## 11. 面向切面编程AOP和装饰器   
+stack overflow参考：[Use of \*args and \*\*kwargs](https://stackoverflow.com/questions/3394835/use-of-args-and-kwargs)   
+## 11. 面向切面编程AOP和装饰器     
 AOP和OOP一样，是一种编程范式，这种在运行时，动态地将代码切入到类的指定方法、指定位置上的编程思想就是面向切面的编程。简单理解我认为AOP是OOP的补充，OOP从横向上区分出一个个类来，而AOP则从纵向上向对象中加入特定的代码，有了AOP之后，OOP就变得立体了。   
 装饰器就是这种思路了，有AOP的编程经验，理解Python的装饰器就是分分钟的事。既然是装饰器，那么对被装饰的对象来说，一定是功能得到了增强，按方法能增强的地方进行划分，又可以分为以下四类：     
 1. 方法调用前； 
@@ -272,7 +293,7 @@ def afterProxy(func):
 ``` 
 StackOverflow参考：[How to make a chain of function decorators?](https://stackoverflow.com/questions/739654/how-to-make-a-chain-of-function-decorators)   
 
-## 12.鸭子类型   
+## 12. 鸭子类型   
 理解：当我们看到远远的一只鸟走起来像鸭子，游泳也像鸭子，叫声也像鸭子，那么我们就可以称这只鸟为鸭子。     
 在编程中：   
 我们并不关心对象是什么类型，到底是不是鸭子，只关心行为。   
@@ -317,4 +338,6 @@ print(Tsinghua.student_number)  # 10000
 ```   
 `__metaclass__`是创建类时起作用.所以我们可以分别使用`__metaclass__`,`__new__`和`__init__`来分别在类创建,实例创建和实例初始化的时候做一些小手脚.  
 
-stack overflow参考：[Why is `__init__()` always called after `__new__()`?](https://stackoverflow.com/questions/674304/why-is-init-always-called-after-new)   
+stack overflow参考：[Why is `__init__()` always called after `__new__()`?](https://stackoverflow.com/questions/674304/why-is-init-always-called-after-new)     
+## 16. Python中的作用域   
+Python中，一个变量的作用域总是由代码中被赋值的地方所决定的，如[1. 函数-传参](# 1. 函数-传参)中也能体现这样一个作用域的思想，在Python中
