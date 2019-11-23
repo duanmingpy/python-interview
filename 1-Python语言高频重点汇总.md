@@ -1,5 +1,7 @@
 # Python语言高频重点汇总   
 ### 目录：   
+  * [Python语言高频重点汇总](#python%E8%AF%AD%E8%A8%80%E9%AB%98%E9%A2%91%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB)
+  * [目录：](#%E7%9B%AE%E5%BD%95)
   * [1\. 函数\-传参](#1-%E5%87%BD%E6%95%B0-%E4%BC%A0%E5%8F%82)
   * [2\. 元类](#2-%E5%85%83%E7%B1%BB)
   * [3\. @staticmethod和@classmethod两个装饰器](#3-staticmethod%E5%92%8Cclassmethod%E4%B8%A4%E4%B8%AA%E8%A3%85%E9%A5%B0%E5%99%A8)
@@ -16,6 +18,18 @@
   * [14\. 新式类和旧式类](#14-%E6%96%B0%E5%BC%8F%E7%B1%BB%E5%92%8C%E6%97%A7%E5%BC%8F%E7%B1%BB)
   * [15\. \_\_new\_\_和\_\_init\_\_的区别](#15-__new__%E5%92%8C__init__%E7%9A%84%E5%8C%BA%E5%88%AB)
   * [16\. Python中的作用域](#16-python%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F)
+  * [17\. GIL线程全局锁](#17-gil%E7%BA%BF%E7%A8%8B%E5%85%A8%E5%B1%80%E9%94%81)
+  * [18\. 协程](#18-%E5%8D%8F%E7%A8%8B)
+  * [19\. 闭包](#19-%E9%97%AD%E5%8C%85)
+  * [20\. lambda匿名函数](#20-lambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0)
+  * [21\. Python中函数式编程](#21-python%E4%B8%AD%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B)
+  * [22\. Python中的拷贝](#22-python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D)
+  * [23\. Python的垃圾回收机制](#23-python%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6)
+  * [24\. List](#24-list)
+  * [25\. Python中的is](#25-python%E4%B8%AD%E7%9A%84is)
+  * [26\. read, readline和readlines](#26-read-readline%E5%92%8Creadlines)
+  * [27\. Python2和Python3的区别](#27-python2%E5%92%8Cpython3%E7%9A%84%E5%8C%BA%E5%88%AB)
+  * [28\. super init](#28-super-init)
 
 ## 1. 函数-传参   
 在python中，给一个函数传递参数其实是把实参这个变量对应的地址复制了一份，然后把复制的这个地址传递给函数中局部变量形参，此时实参和对应的形参都指向内存中这一个实际的对象。   
