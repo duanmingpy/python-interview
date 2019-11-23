@@ -1,7 +1,7 @@
 # Python语言     
 **目录：**   
 [1. 函数-传参](1.-函数\-传参)    
-[2. 元类](2.-元类)   
+[2. 元类](#2.-元类)   
 [3. @staticmethod和@classmethod两个装饰器](3.-@staticmethod和@classmethod两个装饰器)    
 [4. 类属性和实例属性](4.-类属性和实例属性)   
 [5. Python的自省](5.-Python的自省)    
