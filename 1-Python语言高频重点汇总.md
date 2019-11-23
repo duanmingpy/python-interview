@@ -1,7 +1,7 @@
 # Python语言     
 **目录：**   
 [1. 函数-传参](1.-函数\-传参)    
-[2. 元类](2\.-元类)   
+[2. 元类](2-元类)   
 [3. @staticmethod和@classmethod两个装饰器](3.-@staticmethod和@classmethod两个装饰器)    
 [4. 类属性和实例属性](4.-类属性和实例属性)   
 [5. Python的自省](5.-Python的自省)    
@@ -72,7 +72,7 @@ print("函数调用之后的lst:", lst)
 我们可以把所有变量理解为内存中一个对象的`引用`，或者可以看作是C++ 中的指针类型。每一个变量记住的都是对象的地址，而对象又可以分为`可变的mutable`和`不可变的immutable`，在python中，string、tuple、数值是不可变的，list、set、dict是可修改的对象，可以通过多个变量都记住它的地址，然后通过不同变量去修改这些可修改的对象。   
 这是stack overflow上的解答：[连接地址](http://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference)    
 
-## 2. 元类   
+## 2 元类   
 元类又叫metaclass，在python中我们使用`type(59)`就可以知道59是int类型，但是你考虑过int类的类型吗？这就是元类问题，python中一切皆对象，就像linux中的一切皆文件哲学那么彻底，所以类也是对象，既然是对象就有类型，所有新类型的缺省都是type类型，可以修改，在python中，当我们创建一个对象的时候，它会进行类型检查，如果我们没指定类型缺省就是type类了。可以参考下图：   
 ![元类](https://github.com/duanmingpy/python-interview/blob/master/images/yuanlei.png)
    
