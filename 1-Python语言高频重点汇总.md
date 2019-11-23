@@ -337,4 +337,179 @@ print(Tsinghua.student_number)  # 10000
 
 stack overflow参考：[Why is `__init__()` always called after `__new__()`?](https://stackoverflow.com/questions/674304/why-is-init-always-called-after-new)     
 ## 16. Python中的作用域   
-Python中，一个变量的作用域总是由代码中被赋值的地方所决定的，如[1. 函数-传参](# 1. 函数-传参)中也能体现这样一个作用域的思想，在Python中
+Python中，一个变量的作用域总是由代码中被赋值的地方所决定的，如[1\. 函数\-传参](#1-%E5%87%BD%E6%95%B0-%E4%BC%A0%E5%8F%82)中也能体现这样一个作用域的思想，在Python中遇到一个变量的搜索顺序是：    
+本地作用域（Local）→ 当前作用域被嵌入的本地作用域（Enclosing locals） → 全局/模块作用域（Global）→ 内置作用域（Built-in）。    
+
+## 17. GIL线程全局锁   
+线程全局锁(Global Interpreter Lock),即Python为了保证线程安全而采取的独立线程运行的限制,说白了就是一个核只能在同一时间运行一个线程.对于io密集型任务，python的多线程起到作用，但对于cpu密集型任务，python的多线程几乎占不到任何优势，还有可能因为争夺资源而变慢。      
+可以参考开源中国的翻译文章：[Python最难的问题](https://www.oschina.net/translate/pythons-hardest-problem)      
+
+## 18. 协程   
+简单点说协程是进程和线程的升级版,进程和线程都面临着内核态和用户态的切换问题而耗费许多切换时间，而协程就是用户自己控制切换的时机，不再需要陷入系统的内核态。    
+Python里最常见的yield就是协程的思想!    
+
+## 19. 闭包   
+闭包(closure)是函数式编程的重要的语法结构。闭包也是一种组织代码的结构，它同样提高了代码的可重复使用性。   
+当一个内嵌函数引用其外部作作用域的变量,我们就会得到一个闭包. 总结一下,创建一个闭包必须满足以下几点:    
+1. 必须有一个内嵌函数   
+2. 内嵌函数必须引用外部函数中的变量
+3. 外部函数的返回值必须是内嵌函数
+
+重点是函数运行后并不会被撤销，就像[16\. Python中的作用域](#16-python%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F)的instance字典一样,当函数运行完后，instance并不被销毁，而是继续留在内存空间里，这个功能类似类里的类变量，只不过迁移到了函数上。  
+闭包就像个空心球一样，你知道外面和里面，但你不知道中间是什么样。     
+## 20. lambda匿名函数   
+lambda函数叫做匿名函数的原因是当我们想要再次调用这个函数的时候，我们必须重写一遍，也就是重新定义一遍，虽然可以有标识符记住它，但是我们一般不这样做，真的是用来复用的函数我们会使用def关键字进行定义，注意的是lambda函数中不能出现`return`和`等号`。        
+```python   
+print((lambda a, b: a + b)(3, 4))  
+
+res = lambda : 100
+
+print(res())  # 可以记住，但是一般不这样做
+
+result = (lambda a, b: a + b)(3, 4)
+```   
+详细内容参考知乎：[Lambda 表达式有何用处？如何使用？](https://www.zhihu.com/question/20125256)
+
+## 21. Python中函数式编程   
+支持`filter`、`map`、`reduce`三个高阶函数。   
+```python   
+a = [i for i in range(10) if i & 1]
+
+result = filter(lambda x: x > 5, a)
+print(result)  # <filter object at 0x00000204412ECC88>
+print(list(result))  # [7, 9]  
+```   
+```python   
+a = [i for i in range(10) if i & 1]
+
+result = map(lambda x: str(x), a)
+print(result)  # <map object at 0x0000022BEB4BCAC8>
+print(list(result))  # ['1', '3', '5', '7', '9']
+```     
+```python
+from functools import reduce
+a = [i for i in range(10) if i & 1]
+
+result = reduce(lambda x, y: x + y, a)
+print(result)  # 25
+```      
+从上面可以看到，`filter`和`map`的结果都是惰性的，`reduce`的结果不是惰性的。      
+
+## 22. Python中的拷贝   
+copy()我们称为浅拷贝，deepcopy()我们称为深拷贝；看下面的例子：   
+```python   
+import copy
+lst = [1, 2, [5, 6]]
+print("修改前的lst：", lst)
+new_lst1 = lst.copy()
+new_lst2 = copy.copy(lst)
+new_lst3 = copy.deepcopy(lst)
+
+lst[2][0] = 100  # 把lst的元素修改了,引用类型
+
+print("修改后的lst：", lst)
+print("内置的函数copy():", new_lst1)
+print("copy模块的函数copy():", new_lst2)
+print("copy模块的函数deepcopy():", new_lst3)
+
+# 输出结果：   
+修改前的lst： [1, 2, [5, 6]]
+修改后的lst： [1, 2, [100, 6]]
+内置的函数copy(): [1, 2, [100, 6]]
+copy模块的函数copy(): [1, 2, [100, 6]]
+copy模块的函数deepcopy(): [1, 2, [5, 6]]
+```
+从结果中我们可以看到，如果是内置的copy还是copy模块的copy对于列表中存的地址都是复制一份地址过来，所以导致在修改地址背后的数据所有的copy都被修改了；而deepcopy则会顺着地址，把地址后面的对象也复制一份，这样在修改了lst之后，new_lst3没有被修改。    
+
+## 23. Python的垃圾回收机制   
+Python GC主要使用引用计数（reference counting）来跟踪和回收垃圾。在引用计数的基础上，通过“标记-清除”（mark and sweep）解决容器对象可能产生的循环引用问题，通过“分代回收”（generation collection）以空间换时间的方法提高垃圾回收效率。    
+**一：引用计数**       
+PyObject是每个对象必有的内容，其中ob_refcnt就是做为引用计数。当一个对象有新的引用时，它的ob_refcnt就会增加，当引用它的对象被删除，它的ob_refcnt就会减少.引用计数为0时，该对象生命就结束了。
+
+优点:   
+1. 简单   
+2. 实时性   
+
+缺点:   
+1. 维护引用计数消耗资源   
+2. 循环引用   
+
+**二：标记-清除机制**   
+基本思路是先按需分配，等到没有空闲内存的时候从寄存器和程序栈上的引用出发，遍历以对象为节点、以引用为边构成的图，把所有可以访问到的对象打上标记，然后清扫一遍内存空间，把所有没标记的对象释放。    
+
+**三：分代技术**    
+分代回收的整体思想是：将系统中的所有内存块根据其存活时间划分为不同的集合，每个集合就成为一个“代”，垃圾收集频率随着“代”的存活时间的增大而减小，存活时间通常利用经过几次垃圾回收来度量。
+
+Python默认定义了三代对象集合，索引数越大，对象存活时间越长。
+
+举例： 当某些内存块M经过了3次垃圾收集的清洗之后还存活时，我们就将内存块M划到一个集合A中去，而新分配的内存都划分到集合B中去。当垃圾收集开始工作时，大多数情况都只对集合B进行垃圾回收，而对集合A进行垃圾回收要隔相当长一段时间后才进行，这就使得垃圾收集机制需要处理的内存少了，效率自然就提高了。在这个过程中，集合B中的某些内存块由于存活时间长而会被转移到集合A中，当然，集合A中实际上也存在一些垃圾，这些垃圾的回收会因为这种分代的机制而被延迟。    
+
+## 24. List   
+List是python的内置数据结构，在标准库中一句pass带过，Cpython是用C语言写的List，下面是C中List的结构：   
+**结构定义：**
+```C
+typedef struct {
+    PyObject_VAR_HEAD
+    PyObject **ob_item;
+    Py_ssize_t allocated;
+} PyListObject;
+```   
+**初始化：**   
+假定是空列表[]   
+```C  
+arguments: size of the list = 0
+returns: list object = []
+PyListNew:
+    nbytes = size * size of global Python object = 0
+    allocate new list object
+    allocate list of pointers (ob_item) of size nbytes = 0
+    clear ob_item
+    set list's allocated var to 0 = 0 slots
+    return list object 
+```   
+非常重要的是知道list申请内存空间的大小（后文用allocated代替）的大小和list实际存储元素所占空间的大小(ob_size)之间的关系，ob_size的大小和len(L)是一样的，而allocated的大小是在内存中已经申请空间大小。通常你会看到allocated的值要比ob_size的值要大。这是为了避免每次有新元素加入list时都要调用realloc进行内存分配。接下来我们会看到更多关于这些的内容。    
+
+**追加：**   
+使用Append函数会调用内部的C函数app1()   
+```C   
+arguments: list object, new element
+returns: 0 if OK, -1 if not
+app1:
+    n = size of list
+    call list_resize() to resize the list to size n+1 = 0 + 1 = 1
+    list[n] = list[0] = new element
+    return 0
+```     
+`list_resize()`会申请多余的空间以避免调用多次`list_resize()`，list的增长模型是: 0, 4, 8, 16, 25, 35, 46, 58, 72, 88, ...    
+```C   
+arguments: list object, new size
+returns: 0 if OK, -1 if not
+list_resize:
+    new_allocated = (newsize >> 3) + (newsize < 9 ? 3 : 6) = 3
+    new_allocated += newsize = 3 + 1 = 4
+    resize ob_item (list of pointers) to size new_allocated
+    return 0
+```   
+还有其他对应的函数可以参考网上的解读。    
+推荐简书上的解答：[Python中list的实现](https://www.jianshu.com/p/J4U6rR)     
+
+## 25. Python中的is   
+在python中我们经常会有判断两个值或两个对象是否相等或是同一个，在两个对象使用`==`进行比较的时候会调用相应的实例魔术方法`__eq__`，而使用is进行比较的时候会比较两个对象的内存地址。   
+```python   
+class MyClass1:
+    def __init__(self):
+        self.num = 1
+    def __eq__(self, other):
+        return self.num == other
+
+class MyClass2:
+    def __init__(self):
+        self.num = 1
+
+    def __eq__(self, other):
+        return other == self.num
+
+print(MyClass1() == MyClass2())  # True
+print(MyClass1() is MyClass2())  # False
+```   
+看上面的例子，真正比较的是两个对象的num属性，而is比较的是对象的地址；如果没有定义`__eq__`则`==`会比较内存地址，一般容器`==`比较的是大小，非容器的`==`比较的是地址。
