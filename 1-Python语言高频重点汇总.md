@@ -1,7 +1,7 @@
 # Python语言     
 **目录：**   
 [1. 函数-传参](1.-函数\-传参)    
-[2. 元类](#2.-元类)   
+[2. 元类](2\.-元类)   
 [3. @staticmethod和@classmethod两个装饰器](3.-@staticmethod和@classmethod两个装饰器)    
 [4. 类属性和实例属性](4.-类属性和实例属性)   
 [5. Python的自省](5.-Python的自省)    
@@ -17,8 +17,13 @@
 [15. `__new__`和`__init__`的区别](15.-\`\_\_new\_\_\`和\`_\_init\_\_\`的区别)      
 [16. Python中的作用域](16.-Python中的作用域)
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+**Table of Contents**
 
+  * [2. 元类](#2.-元类)     
+  * [3. @staticmethod和@classmethod两个装饰器](#3.-@staticmethod和@classmethod两个装饰器)   
 
+<!-- markdown-toc end -->
 
 ## 1. 函数-传参   
 在python中，给一个函数传递参数其实是把实参这个变量对应的地址复制了一份，然后把复制的这个地址传递给函数中局部变量形参，此时实参和对应的形参都指向内存中这一个实际的对象。   
