@@ -6,7 +6,7 @@
 ## 第一部分是：[Python语言的要点](https://github.com/duanmingpy/python-interview/blob/master/1-Python%E8%AF%AD%E8%A8%80%E9%AB%98%E9%A2%91%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB.md)   
 ## 第二部分是：操作系统的要点  
 ## 第三部分是：网络的要点
-## 第四部分是：数据库的要点   
+## 第四部分是：[数据库的要点](https://github.com/duanmingpy/python-interview/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A6%81%E7%82%B9.md)   
 ## 第五部分是：数据结构的重点  
 ## 第六部分是：经典算法题目汇总  
 ## 第七部分是：[设计模式总结](https://github.com/duanmingpy/python-interview/blob/master/7-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%B1%87%E6%80%BB.md)
