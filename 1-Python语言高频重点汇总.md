@@ -30,7 +30,8 @@
   * [25\. Python中的is](#25-python%E4%B8%AD%E7%9A%84is)
   * [26\. read, readline和readlines](#26-read-readline%E5%92%8Creadlines)
   * [27\. Python2和Python3的区别](#27-python2%E5%92%8Cpython3%E7%9A%84%E5%8C%BA%E5%88%AB)
-  * [28\. super init](#28-super-init)
+  * [28\. super init](#28-super-init)    
+  * [29\. 元编程](#29metaprogramming)
 
 ## 1. 函数-传参   
 [**回到顶部**](#python%E8%AF%AD%E8%A8%80%E9%AB%98%E9%A2%91%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB)    
@@ -630,3 +631,73 @@ Python 3.4.1
 stack overflow参考：[Understanding Python super() with `__init__()` methods \[duplicate\]](https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods)    
 CSDN参考：[
 Python2.7中的super方法浅见](https://blog.csdn.net/mrlevo520/article/details/51712440)
+
+
+## 29.metaprogramming
+## 元编程
+元编程概念来自`LISP`和`smalltalk`；我们写程序是直接写代码，是否能够用代码来生成未来我们需要的代码吗？这就是元编程。      
+例如，我们写一个类class A，能否用代码生成一个类出来？
+用来生成代码的程序称为元程序`metaprogram`，编写这种程序就称为元编程`metaprogramming`。Python语言能够通过`反射`实现元编程。      
+
+**常识：**    
+在Python中，所有非object类都继承自`object类`，所有类的类型包括type类都是`type`，`type类`继承自`object类`，`object类`的类型也是`type类`。   
+![元类](https://github.com/duanmingpy/python-interview/blob/master/images/yuanlei.png)    
+
+**type类的签名：**    
+```python   
+class type(object):
+    def __init__(cls, what, bases=None, dict=None):
+
+# 实例化（用法）：
+# type(object_or_name, bases, dict)
+type(object) -> the object's type
+type(name, bases, dict) -> a new type
+```   
+从签名中可以看到：`type(object) -> the object's type` ，返回对象的类型，例如`type(10)`;   
+`type(name, bases, dict) -> a new type`返回一个新的类。    
+
+**应用：**   
+```python   
+class Field:
+    def __init__(self, fieldname=None, pk=False, null=False):
+        self.fieldname = fieldname
+        self.pk = pk
+        self.null = null
+ 
+    def __repr__(self):
+        return "<Field {} {} {}>".format(
+            self.fieldname, self.pk, self.null
+        )
+
+class ModelMeta(type):
+    def __new__(cls, name, bases, attrs:dict):
+        print('M ~~~~~~~~')
+        print(cls)
+        print(name, bases, attrs)
+     
+        if not hasattr(attrs, 'db_table'):
+            attrs['db_table'] = name.lower()
+            primarykeys = []
+            for k, v in attrs.items():
+                if isinstance(v, Field):
+                if not v.fieldname or v.fieldname.strip() == '':
+                    v.fieldname = k # 字段没有名字使用属性名
+                if v.pk:
+                primarykeys.append(v)
+        
+        attrs['__primarykeys__'] = primarykeys
+        return super().__new__(cls, name, bases, attrs)
+
+
+class Model(metaclass=ModelMeta):
+ """从Model继承的类的类型都是ModelMeta"""
+
+
+class Student(Model):
+    id = Field(pk=True, null=False)
+    name = Field('username', null=False)
+    age = Field()   
+    print('-' * 30)
+    print(Student.__dict__)
+```      
+这段应用就是django的框架代码。    
