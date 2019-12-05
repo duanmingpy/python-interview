@@ -12,7 +12,7 @@
 ## 第四部分是：[数据库相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/4-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)   
 ## 第五部分是：[数据结构相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/5-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)  
 ## 第六部分是：经典算法题目汇总  
-## 第七部分是：[设计模式相关问题](https://github.com/duanmingpy/python-interview/blob/master/7-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%B1%87%E6%80%BB.md)
+## 第七部分是：[设计模式相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/7-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)
 
 #### 目前草稿版的第一部分、第二部分、第三部分、第四部分、第五部分都已经编写完毕，正在往这个仓库中整理第一部分，为了检查错误和复习，我会一个字一个字、一个例子一个例子的重写排好版传上来，预计耗时1.5月，草稿版过于杂乱就不直接上传了，望理解，可以⭐Star鼓励一下！   
 
