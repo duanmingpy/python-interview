@@ -10,7 +10,7 @@
 ## 第二部分是：[操作系统相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)  
 ## 第三部分是：网络相关问题
 ## 第四部分是：[数据库相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/4-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)   
-## 第五部分是：[数据结构相关问题](https://github.com/duanmingpy/python-interview/blob/master/5-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)  
+## 第五部分是：[数据结构相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/5-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)  
 ## 第六部分是：经典算法题目汇总  
 ## 第七部分是：[设计模式相关问题](https://github.com/duanmingpy/python-interview/blob/master/7-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%B1%87%E6%80%BB.md)
 
