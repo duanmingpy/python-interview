@@ -1,7 +1,3 @@
-# 介绍   
-目前草稿版的第一部分、第二部分、第三部分、第四部分、第五部分都已经编写完毕，草稿版过于杂乱， 正在陆续往这个仓库中整理，预计耗时1.5月，望理解，如果觉得不错可以⭐Star鼓励一下！  
-
-
 # 面试宝典结构(更新ing...)   
 ## 第一部分是：[Python语言相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/1-python%E8%AF%AD%E8%A8%80%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)   
 ## 第二部分是：[操作系统相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)  
