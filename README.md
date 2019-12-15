@@ -7,5 +7,7 @@
 ## 第六部分是：[经典算法题目汇总](https://github.com/duanmingpy/python-interview/blob/master/markdowns/6-%E7%AE%97%E6%B3%95%E9%A2%98%E7%9B%AE%E7%9B%B8%E5%85%B3.md)  
 ## 第七部分是：[设计模式相关问题](https://github.com/duanmingpy/python-interview/blob/master/markdowns/7-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)
   
+# 笔记部分（更新中...）
+## [django部分]()
 
 
