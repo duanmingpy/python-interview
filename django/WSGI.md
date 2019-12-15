@@ -2,7 +2,7 @@
 
 WSGI全称是Web Server Gateway Interface，是python中通用的一个网关接口，对于动态资源需要调用处理函数，WSGI就是用来连接Web Server和应用程序之间的网关接口。
 
-![wsgi](D:\图片仓库\02WSGI.jpg)
+![wsgi](https://github.com/duanmingpy/python-interview/blob/master/images/02WSGI.jpg)
 
 **WEB服务器**
 
