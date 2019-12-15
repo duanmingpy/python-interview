@@ -1,4 +1,6 @@
 # WSGI
+[返回目录](https://github.com/duanmingpy/python-interview/blob/master/django/%E7%9B%AE%E5%BD%95.md)         
+[返回首页](https://github.com/duanmingpy/python-interview)           
 
 WSGI全称是Web Server Gateway Interface，是python中通用的一个网关接口，对于动态资源需要调用处理函数，WSGI就是用来连接Web Server和应用程序之间的网关接口。
 
