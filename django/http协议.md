@@ -1,5 +1,6 @@
 # http协议
-
+[返回目录](https://github.com/duanmingpy/python-interview/blob/master/django/%E7%9B%AE%E5%BD%95.md)         
+[返回首页](https://github.com/duanmingpy/python-interview)           
 ### web开发
 
 **CS:** CS即客户端、服务器编程。客户端、服务端之间需要使用`Socket`，约定协议、版本（往往使用的协议是`TCP或者UDP`），指定地址和端口，就可以通信了。客户端、服务端传输数据，数据可以有一定的格式，双方必须先约定好。
